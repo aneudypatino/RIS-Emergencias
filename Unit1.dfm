@@ -1198,7 +1198,7 @@ object Form1: TForm1
       'Provider=MSDASQL.1;Persist Security Info=False;Data Source=sispr' +
       'osa'
     LoginPrompt = False
-    Left = 600
+    Left = 624
     Top = 448
   end
   object ADOQuery1: TADOQuery
@@ -1230,9 +1230,11 @@ object Form1: TForm1
       
         'INNER JOIN GES_PLANXARS pa ON (p.PLAN_COBERTURA = pa.PLAN_COBERT' +
         'URA)'
-      'WHERE GES_HISTORIAL.TIPO_RIS = '#39'EMERGENCIA'#39
+      
+        'WHERE GES_HISTORIAL.TIPO_RIS = '#39'EMERGENCIA'#39' and r.ESTADO = '#39'REGI' +
+        'STRADO'#39
       'ORDER BY GES_HISTORIAL.FECHA_CREACION DESC')
-    Left = 560
+    Left = 656
     Top = 448
     object ADOQuery1RIS: TStringField
       FieldName = 'RIS'
@@ -1342,7 +1344,7 @@ object Form1: TForm1
     Connection = ADOCon
     CursorType = ctStatic
     TableName = 'GINE_PARAMETROS'
-    Left = 512
+    Left = 688
     Top = 448
     object ADOTable1INSTITUCION: TIntegerField
       FieldName = 'INSTITUCION'
@@ -1540,8 +1542,8 @@ object Form1: TForm1
   object DataSource1: TDataSource
     AutoEdit = False
     DataSet = ADOQuery1
-    Left = 464
-    Top = 448
+    Left = 568
+    Top = 456
   end
   object frxReport1: TfrxReport
     Version = '4.11.17'

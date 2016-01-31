@@ -245,6 +245,7 @@ if Edit1.Text <> '' then  //Si el Edit esta lleno
       SQL.Add('INNER JOIN GES_ARS s ON (p.ARS = s.ARS)');
       SQL.Add('INNER JOIN GES_PLANXARS pa ON (p.PLAN_COBERTURA = pa.PLAN_COBERTURA)');
       SQL.Add('WHERE GES_HISTORIAL.TIPO_RIS = '''+'EMERGENCIA'+'''');
+      SQL.Add('AND r.ESTADO = '''+'REGISTRADO'+'''');
       //Parameters.ParamByName('RIS').Value := (Edit1.Text); //Parametro de busqueda
       SQL.Add('ORDER BY GES_HISTORIAL.FECHA_CREACION DESC');
       Open; //Abrir consulta

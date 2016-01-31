@@ -3,10 +3,10 @@ unit Unit1;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.UITypes, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.DBCGrids, Data.Win.ADODB,
   Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.StdCtrls, frxClass, frxDBSet, RpCon,
-  RpConDS, RpDefine, RpRave, Vcl.ExtCtrls;
+  RpConDS, RpDefine, RpRave, Vcl.ExtCtrls, rRIS;
 
 type
   TForm1 = class(TForm)
@@ -113,6 +113,8 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure SpeedButton2Click(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure LinkLabel1LinkClick(Sender: TObject; const Link: string;
+      LinkType: TSysLinkType);
   private
     { Private declarations }
   public
@@ -157,17 +159,24 @@ end;
 
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
 begin
+//Usar tecla Enter para buscar
 // Primero KeyPreview en el form a True
 if Key=#13 then     //Si la tecla es Enter
   begin
     Key:= #0;
-    SpeedButton4.Click;
+    SpeedButton4.Click;  //Click boton Buscar
   end;
+end;
+
+procedure TForm1.LinkLabel1LinkClick(Sender: TObject; const Link: string;
+  LinkType: TSysLinkType);
+begin
+ Form2.Show;  //llamo el Acerca de en rRis
 end;
 
 procedure TForm1.SpeedButton1Click(Sender: TObject);
 begin
-  ADOQuery1.Close;
+  ADOQuery1.Close;  //Actualizar
   ADOQuery1.Open;
 end;
 
@@ -187,12 +196,14 @@ end;
 
 procedure TForm1.SpeedButton3Click(Sender: TObject);
 begin
+//Btn Salir
  ADOQuery1.Close; // Cerrar el Query y el Form
  Close
 end;
 
 procedure TForm1.SpeedButton4Click(Sender: TObject);
 begin
+//Btn Buscar
 if Edit1.Text <> '' then  //Si el Edit esta lleno
   begin
  //Con el Query la busqueda del RIS
@@ -234,8 +245,6 @@ if Edit1.Text <> '' then  //Si el Edit esta lleno
       SQL.Add('INNER JOIN GES_ARS s ON (p.ARS = s.ARS)');
       SQL.Add('INNER JOIN GES_PLANXARS pa ON (p.PLAN_COBERTURA = pa.PLAN_COBERTURA)');
       SQL.Add('WHERE GES_HISTORIAL.TIPO_RIS = '''+'EMERGENCIA'+'''');
-      //SQL.Add('WHERE GES_HISTORIAL.TIPO_RIS = ''EMERGENCIA');
-      //SQL.Add('WHERE GES_HISTORIAL.TIPO_RIS = '''+'EMERGENCIA'+'''');
       //Parameters.ParamByName('RIS').Value := (Edit1.Text); //Parametro de busqueda
       SQL.Add('ORDER BY GES_HISTORIAL.FECHA_CREACION DESC');
       Open; //Abrir consulta
