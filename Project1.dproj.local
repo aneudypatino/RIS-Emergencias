@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/01/22 22:44:35.000.888,=C:\Users\apatino\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/01/23 02:15:41.000.767,C:\Users\apatino\Documents\RAD Studio\Projects\Unit1.pas=C:\SIGHOEmergencia\RIS Emergencias\Unit1.pas</Transaction>
+    <Transaction>2016/01/23 02:15:41.000.767,C:\Users\apatino\Documents\RAD Studio\Projects\Unit1.dfm=C:\SIGHOEmergencia\RIS Emergencias\Unit1.dfm</Transaction>
+    <Transaction>2016/01/23 02:16:49.000.431,C:\Users\apatino\Documents\RAD Studio\Projects\Project1.dproj=C:\SIGHOEmergencia\RIS Emergencias\Project1.dproj</Transaction>
+    <Transaction>2016/01/23 20:00:33.000.622,=C:\SIGHOEmergencia\RIS Emergencias\Unit2.pas</Transaction>
+    <Transaction>2016/01/23 20:01:37.000.582,C:\SIGHOEmergencia\RIS Emergencias\Unit2.pas=C:\SIGHOEmergencia\RIS Emergencias\rRIS.pas</Transaction>
+    <Transaction>2016/01/23 20:01:37.000.582,C:\SIGHOEmergencia\RIS Emergencias\Unit2.dfm=C:\SIGHOEmergencia\RIS Emergencias\rRIS.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

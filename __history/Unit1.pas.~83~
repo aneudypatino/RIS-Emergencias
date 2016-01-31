@@ -1,0 +1,254 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.DBCGrids, Data.Win.ADODB,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.StdCtrls, frxClass, frxDBSet, RpCon,
+  RpConDS, RpDefine, RpRave, Vcl.ExtCtrls, rRIS;
+
+type
+  TForm1 = class(TForm)
+    ADOCon: TADOConnection;
+    ADOQuery1: TADOQuery;
+    ADOTable1: TADOTable;
+    DataSource1: TDataSource;
+    DBGrid1: TDBGrid;
+    SpeedButton1: TSpeedButton;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    frxReport1: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    ADOTable1INSTITUCION: TIntegerField;
+    ADOTable1DETALLE: TStringField;
+    ADOTable1CODIGO_SESPAS: TIntegerField;
+    ADOTable1DIRECCION: TStringField;
+    ADOTable1PROVINCIA: TStringField;
+    ADOTable1MUNICIPIO: TStringField;
+    ADOTable1RNC: TStringField;
+    ADOTable1TELEFONO: TStringField;
+    ADOTable1FAX: TStringField;
+    ADOTable1RESPONSABLE: TStringField;
+    ADOTable1PUESTO: TStringField;
+    ADOTable1PREFIJO_CODIGO: TStringField;
+    ADOTable1CALCULO_COSTOS: TStringField;
+    ADOTable1HISTORIA_ESPORADICA: TStringField;
+    ADOTable1NOTAS: TStringField;
+    ADOTable1USUARIO_CREO: TStringField;
+    ADOTable1FECHA_CREO: TDateTimeField;
+    ADOTable1USUARIO_MODIFICO: TStringField;
+    ADOTable1FECHA_MODIFICO: TDateTimeField;
+    ADOTable1LOCALIDAD: TStringField;
+    ADOTable1RIV_EDADADULTO_ANOS: TIntegerField;
+    ADOTable1RIV_FERTIL_ANOS_INICIO: TIntegerField;
+    ADOTable1RIV_FERTIL_ANOS_FIN: TIntegerField;
+    ADOTable1RIV_PUERPERIO_DIAS: TIntegerField;
+    ADOTable1RIV_RN_MESES_INICIO: TIntegerField;
+    ADOTable1RIV_RN_MESES_FIN: TIntegerField;
+    ADOTable1RIV_HOMBRE_ANOS_INICIO: TIntegerField;
+    ADOTable1RIV_HOMBRE_ANOS_FIN: TIntegerField;
+    ADOTable1RIV_ADULTOS_MAS_ANOS: TIntegerField;
+    ADOTable1RUTA_FOTOS: TStringField;
+    ADOTable1SENASA_AFILIADO: TStringField;
+    ADOTable1SENASA_DEPENDIENTE: TStringField;
+    ADOTable1ULTIMP_SENASA_FECHA: TDateTimeField;
+    ADOTable1ULTIMP_SENASA_USUARIO: TStringField;
+    ADOTable1TIPO_CALCULO_FACTURACION: TStringField;
+    ADOTable1RUTA_EXPORTAR: TStringField;
+    ADOTable1SUM_BLOQUEAR_POR_LOTE: TStringField;
+    ADOTable1RIV_PROVINCIA: TStringField;
+    ADOTable1RIV_MUNICIPIO: TStringField;
+    ADOTable1RIV_PFV: TBCDField;
+    ADOTable1GES_AM_ENVIAR_NOTIFICACION: TStringField;
+    ADOTable1GES_AM_SMTP_HOST: TStringField;
+    ADOTable1GES_AM_SMTP_USUARIO: TStringField;
+    ADOTable1GES_AM_SMTP_CLAVE: TStringField;
+    ADOTable1GES_AM_NOMBRE_EMISOR: TStringField;
+    ADOTable1GES_AM_ASUNTO: TStringField;
+    ADOTable1GES_AM_MENSAJE_PIE: TStringField;
+    ADOTable1GES_BLOQUEAR_JORNADA: TStringField;
+    ADOTable1CODIGO_MSP: TStringField;
+    ADOTable1SERVICIO_REGIONAL: TStringField;
+    ADOTable1AREA_SALUD: TStringField;
+    ADOTable1GES_CODIGO_EMERGENCIA: TIntegerField;
+    ADOQuery1RIS: TStringField;
+    ADOQuery1EXPEDIENTE: TStringField;
+    ADOQuery1NOMBRES: TStringField;
+    ADOQuery1PRIMER_APELLIDO: TStringField;
+    ADOQuery1SEGUNDO_APELLIDO: TStringField;
+    ADOQuery1CEDULA: TStringField;
+    ADOQuery1NSS: TStringField;
+    ADOQuery1FECHA_NACIMIENTO: TDateTimeField;
+    ADOQuery1DETALLE: TStringField;
+    ADOQuery1SEXO: TStringField;
+    ADOQuery1CALLE: TStringField;
+    ADOQuery1CASA: TStringField;
+    ADOQuery1EDIFICIO: TStringField;
+    ADOQuery1PISO: TStringField;
+    ADOQuery1APARTAMENTO: TStringField;
+    ADOQuery1REFERENCIA: TStringField;
+    ADOQuery1TELEFONO1: TStringField;
+    ADOQuery1TELEFONO2: TStringField;
+    ADOQuery1DETALLE_1: TStringField;
+    ADOQuery1DETALLE_2: TStringField;
+    ADOQuery1ESTADO_CIVIL: TStringField;
+    ADOQuery1FECHA_CREACION: TDateTimeField;
+    ADOQuery1HORA_CREACION: TStringField;
+    ADOQuery1ESTADO: TStringField;
+    ADOQuery1USUARIO_CREO: TStringField;
+    ADOQuery1TIPO_RIS: TStringField;
+    LinkLabel1: TLinkLabel;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ADOQuery1AfterOpen(DataSet: TDataSet);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure LinkLabel1LinkClick(Sender: TObject; const Link: string;
+      LinkType: TSysLinkType);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.ADOQuery1AfterOpen(DataSet: TDataSet);
+begin
+//Conteo de Registros
+  Label2.Caption := InttoStr(ADOQuery1.RecordCount)
+end;
+
+procedure TForm1.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+//  if 'CONDICION' then
+//     with (Sender As TDBGrid).Canvas do
+//    begin
+//      brush.Color:=clRed;
+//      FillRect(Rect);
+//      TextOut(Rect.Left, Rect.Top, Column.Field.AsString);
+//    end
+//  else
+//      brush.Color:=clGreen;
+//      FillRect(Rect);
+//      TextOut(Rect.Left, Rect.Top, Column.Field.AsString);
+
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  //Conteo de Registros
+  //Label1.Caption := Label1.Caption + ' '+InttoStr(ADOQuery1.RecordCount)
+end;
+
+procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+//Usar tecla Enter para buscar
+// Primero KeyPreview en el form a True
+if Key=#13 then     //Si la tecla es Enter
+  begin
+    Key:= #0;
+    SpeedButton4.Click;  //Click boton Buscar
+  end;
+end;
+
+procedure TForm1.LinkLabel1LinkClick(Sender: TObject; const Link: string;
+  LinkType: TSysLinkType);
+begin
+ Form2.Show;  //llamo el Acerca de en rRis
+end;
+
+procedure TForm1.SpeedButton1Click(Sender: TObject);
+begin
+  ADOQuery1.Close;  //Actualizar
+  ADOQuery1.Open;
+end;
+
+
+procedure TForm1.SpeedButton2Click(Sender: TObject);
+var nombrepaciente : string;
+begin
+  //IMPRIME EL REPORTE
+  //DATOS DE INSTITICION
+  frxReport1.Variables.Variables['EMPRESA']:=QuotedStr(ADOtABLE1Detalle.AsString);
+  frxReport1.Variables.Variables['DIRECCION']:=QuotedStr(ADOtABLE1DIRECCION.AsString)+QuotedStr(', TEL:')+QuotedStr(ADOtABLE1TELEFONO.AsString);
+  //DATOS DEL PACIENTE
+  nombrepaciente:= Trim(AdoQuery1NOMBRES.AsString)+' '+trim(AdoQuery1PRIMER_APELLIDO.AsString)+' '+trim(AdoQuery1SEGUNDO_APELLIDO.AsString);
+  frxReport1.Variables.Variables['NOMBREPA']:= QuotedStr(NOMBREPACIENTE);
+  frxReport1.ShowReport;  //Muestra el reporte
+end;
+
+procedure TForm1.SpeedButton3Click(Sender: TObject);
+begin
+//Btn Salir
+ ADOQuery1.Close; // Cerrar el Query y el Form
+ Close
+end;
+
+procedure TForm1.SpeedButton4Click(Sender: TObject);
+begin
+//Btn Buscar
+if Edit1.Text <> '' then  //Si el Edit esta lleno
+  begin
+ //Con el Query la busqueda del RIS
+  With ADOQuery1 do
+    Begin
+    Close;      //Cerrarlo
+    SQL.Clear;  //Limpiar SQL Strings
+    //Agregar nueva consulta SQL
+    SQL.Add('SELECT r.ris, r.expediente, p.nombres, p.primer_apellido, p.segundo_apellido,');
+    SQL.Add('p.cedula, p.nss, p.fecha_nacimiento, n.detalle, p.sexo, p.calle, p.casa,');
+    SQL.Add('p.edificio, p.piso, p.APARTAMENTO, p.REFERENCIA, p.TELEFONO1, p.TELEFONO2,');
+    SQL.Add('s.DETALLE,pa.DETALLE, p.ESTADO_CIVIL, r.FECHA_CREACION, r.HORA_CREACION,r.ESTADO,');
+    SQL.Add('r.USUARIO_CREO, r.TIPO_RIS FROM GES_HISTORIAL r');
+    SQL.Add('INNER JOIN GES_PACIENTE p ON (p.expediente = r.expediente)');
+    SQL.Add('INNER JOIN GES_NACIONALIDAD n ON (p.nacionalidad = n.nacionalidad)');
+    SQL.Add('INNER JOIN GES_ARS s ON (p.ARS = s.ARS)');
+    SQL.Add('INNER JOIN GES_PLANXARS pa ON (p.PLAN_COBERTURA = pa.PLAN_COBERTURA)');
+    SQL.Add('WHERE GES_HISTORIAL.TIPO_RIS = '''+'EMERGENCIA'+'''');
+    SQL.Add('AND r.ris like :RIS;');
+    //SQL.Add('ORDER BY GES_HISTORIAL.FECHA_CREACION DESC');
+    Parameters.ParamByName('RIS').Value := (Edit1.Text); //Parametro de busqueda
+
+    Open; //Abrir consulta
+    end;
+  end
+  else    //Si el Edit esta vacio
+    With ADOQuery1 do
+     Begin
+      Close;      //Cerrarlo
+      SQL.Clear;  //Limpiar SQL Strings
+      //Agregar nueva consulta SQL
+      SQL.Add('SELECT r.ris, r.expediente, p.nombres, p.primer_apellido, p.segundo_apellido,');
+      SQL.Add('p.cedula, p.nss, p.fecha_nacimiento, n.detalle, p.sexo, p.calle, p.casa,');
+      SQL.Add('p.edificio, p.piso, p.APARTAMENTO, p.REFERENCIA, p.TELEFONO1, p.TELEFONO2,');
+      SQL.Add('s.DETALLE,pa.DETALLE, p.ESTADO_CIVIL, r.FECHA_CREACION, r.HORA_CREACION,r.ESTADO,');
+      SQL.Add('r.USUARIO_CREO, r.TIPO_RIS FROM GES_HISTORIAL r');
+      SQL.Add('INNER JOIN GES_PACIENTE p ON (p.expediente = r.expediente)');
+      SQL.Add('INNER JOIN GES_NACIONALIDAD n ON (p.nacionalidad = n.nacionalidad)');
+      SQL.Add('INNER JOIN GES_ARS s ON (p.ARS = s.ARS)');
+      SQL.Add('INNER JOIN GES_PLANXARS pa ON (p.PLAN_COBERTURA = pa.PLAN_COBERTURA)');
+      SQL.Add('WHERE GES_HISTORIAL.TIPO_RIS = '''+'EMERGENCIA'+'''');
+      //Parameters.ParamByName('RIS').Value := (Edit1.Text); //Parametro de busqueda
+      SQL.Add('ORDER BY GES_HISTORIAL.FECHA_CREACION DESC');
+      Open; //Abrir consulta
+     end;
+end;
+
+end.
